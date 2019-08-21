@@ -37,6 +37,7 @@ footer{
 	background-color: #7FB3D5;
 	float: right;
 	text-align: center;
+	overflow: scroll;
 }
 
 #contentWrapper #menu ul{
