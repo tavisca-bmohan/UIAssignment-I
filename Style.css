@@ -1,0 +1,73 @@
+
+		*{
+			box-sizing: border-box;
+		}
+
+		header{
+			text-align: center;
+			background: #9CF2A9;
+			padding: 25px 20px;
+			font-size: 20px;
+		}
+
+		footer{
+			background: #7FB3D5;
+			top: 180px;
+    		position: relative;
+		}
+
+		.Menu{
+			width: 20%;
+			background: #aaa;
+			float: left;
+			height: 300px;
+		}
+
+		.Content{
+		}
+
+		ul{
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+
+		}
+
+		#autopopulate-div{
+			float: left;
+		}
+
+		li a{
+			display: block;
+			padding: 8px 10px;
+			text-decoration: none;
+		}
+
+		li a:hover{
+			background-color: #555;
+			color: white;
+		}
+//--------------------------------------------------------
+		.Search-Container{
+			text-align: center;
+		}
+
+		.Search-Container input{
+			height: 40px;
+			width: 300px;
+			margin: 20px;
+			font-size: 17px;
+		}
+
+		.Search-Container button{
+			height: 40px;
+			width: 100px;
+		}
+
+		.Search-Container ul{
+			height: 40px;
+			width: 300px;
+			text-align: center;
+			border-color: black;
+
+		}

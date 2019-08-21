@@ -1,141 +1,37 @@
-<!Doctype html>
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="style.css"> 
 	<title>Hello</title>
-	<style type="text/css">
-		*{
-			box-sizing: border-box;
-		}
-
-		header{
-			text-align: center;
-			background: #9CF2A9;
-			padding: 25px 20px;
-			font-size: 20px;
-		}
-
-		footer{
-			text-align: center;
-			background: #7FB3D5;
-			padding: 25px 20px;
-			font-size: 20px;
-		}
-
-		.Menu{
-			width: 22%;
-			background: #aaa;
-			float: left;
-			margin: 10px;
-			text-align: center;
-			height: 450px;
-		}
-
-		.Content{
-			width: 75%;
-			background: #bbb;
-			float: left;
-			margin: 10px;
-			text-align: center;
-			height: 450px;
-		}
-
-		ul{
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-
-		}
-
-		li a{
-			display: block;
-			padding: 8px 10px;
-			text-decoration: none;
-		}
-
-		li a:hover{
-			background-color: #555;
-			color: white;
-		}
-//--------------------------------------------------------
-		.Search-Container{
-			text-align: center;
-		}
-
-		.Search-Container input{
-			height: 40px;
-			width: 300px;
-			margin: 20px;
-			font-size: 17px;
-		}
-
-		.Search-Container button{
-			height: 40px;
-			width: 100px;
-		}
-
-		.Item-Table{
-			height: 200px;
-			width: 200px;
-			text-align: center;
-			border-color: black;
-		}
-
-	</style>
 </head>
-<body>
+<body onload="GetAutopopulateData()">
 	<header>HEADER</header>
 
-	<div class = "Menu">
-		<h2>Menu</h2>
-		<ul>
-			<li><a href="#Item1">ITEM 1</a></li>
-			<li><a href="#Item2">ITEM 2</a></li>
-			<li><a href="#Item3">ITEM 3</a></li>
-			<li><a href="#Item4">ITEM 4</a></li>
-			<li><a href="#Item5">ITEM 5</a></li>
-		</ul>
-
-	</div>
-
 	<div class = "Content">
+		<div class = "Menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="#Item1">Item 1</a></li>
+				<li><a href="#Item2">Item 2</a></li>
+				<li><a href="#Item3">Item 3</a></li>
+			</ul>
+		</div>
 
 		<div class="Search-Container">
-			<input type="text" id="Input" onkeyup="searchItem()" placeholder="Search...">
-			<BUTTON>ADD</BUTTON>
-
+			<input list="List" type="text" id="Input" onkeyup="searchItem()" placeholder="Search...">
+			<BUTTON onclick= "addItem()">ADD</BUTTON>
 			<ul id="List">
-  				<li><a href="#">I</a></li>
-  				<li><a href="#">It</a></li>
-  				<li><a href="#">Ite</a></li>
-  				<li><a href="#">Item</a></li>
-  				<li><a href="#">Item1</a></li>
-  				<li><a href="#">Item12</a></li>
-  				<li><a href="#">Item123</a></li>
 			</ul>
+		</div>
+		<div id="autopopulate-div">
+			<ul id="autopopulate-div-ul"></ul>
 		</div>
 	</div>
 
 	<footer>FOOTER</footer>
 
-<script>
-function searchItem() {
-    var a, txtValue;
-    var input = document.getElementById("Input");
-    var filter = input.value.toUpperCase();
-    var list = document.getElementById("List");
-    var listItem = list.getElementsByTagName("li");
-    for (var i = 0; i < listItem.length; i++) {
-        a = listItem[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            listItem[i].style.display = "";
-        } else {
-            listItem[i].style.display = "none";
-        }
-    }
-}
-</script>
+	<script type="text/javascript" src="AutopopulateData.js"></script>
+	<script src="Script.js"></script>
 
 </body>
 </html>
