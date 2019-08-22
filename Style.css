@@ -40,6 +40,16 @@ footer{
 	overflow: scroll;
 }
 
+#content #searchBar{
+	width: 300px;
+	height: 30px;
+}
+
+#content button{
+	height: 30px;
+	width: 70px;
+}
+
 #contentWrapper #menu ul{
 	list-style-type: none;
 	padding: 0px;
