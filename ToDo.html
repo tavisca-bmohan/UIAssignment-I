@@ -22,10 +22,13 @@
 			<div  id="content">
 				<div class="show-hide-section" id = "todo-container">
 					<h2>To Do</h2>
-					<input id="searchBar" type="text" name="searchBar" onkeyup="myFunction()" placeholder="Search...">
+					<input id="searchBar" type="text" name="searchBar" placeholder="Search...">
+					<button onclick="search()">SEARCH</button>
 					<button onclick="AddItem()">ADD</button>
 
-					<ul id="list"></ul>
+					<div id="search-list"></div>
+
+					<div id="list"></div>
 				</div>
 
 				<div class="show-hide-section" id="department-container">

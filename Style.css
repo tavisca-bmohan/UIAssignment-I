@@ -37,7 +37,6 @@ footer{
 	background-color: #7FB3D5;
 	float: right;
 	text-align: center;
-	overflow: scroll;
 }
 
 #content #searchBar{
@@ -72,6 +71,16 @@ footer{
 	background-color: #FFFFFF;
 }
 
-#list{
+#contentWrapper #content li{
+	font-size: 25px;
+	margin: 5px;
+	
+}
+
+#contentWrapper #content #list{
 	list-style-type: none;
+	text-align: center;
+	margin: 20px;
+	max-height: 300px;
+	overflow: scroll;
 }

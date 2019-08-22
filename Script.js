@@ -1,23 +1,48 @@
 window.onload = function () {
     ShowItem();
 }
+var data = ["Item1", "Item2", "Item3", "Item4", "Item5", "Item6", "Item7"];
 
-function AddItem(){
+function AddItem() {
+    let textrInSearchBar = document.getElementById("searchBar").value;
+    if (!data.includes(textrInSearchBar) && textrInSearchBar != "")
+        data.push(textrInSearchBar);
+    ShowList();
 	/*var addValue = document.getElementById("searchBar").value;
 	var list = document.getElementById("list");
 	var listItem = list.appendChild(document.createElement("li").appendChild(document.createTextNode(addValue)));
-	document.getElementById("content").appendChild(listItem);*/
+    document.getElementById("content").appendChild(listItem);*/
 
-	let input = document.getElementById("searchBar");
-    let node = document.createElement("li");
-    let nodeItem = document.createTextNode(input.value);
-    node.appendChild(nodeItem);
-    document.getElementById("list").appendChild(node);
+
+    // let input = document.getElementById("searchBar");
+    // let node = document.createElement("li");
+    // let nodeItem = document.createTextNode(input.value);
+    // let list = document.getElementById("list");
+    // node.appendChild(nodeItem);
+    // let flag = checkIfAlreadyExists();
+    // if(!list.includes(input.value))
+    //     list.appendChild(node);
 }
 
-function ShowItem(event){
-	//console.log(event);
-	// IE does not know about the target attribute. It looks for srcElement
+function ShowList() {
+    document.getElementById("list").style.display = "block";
+    let html = `<table><tr>`;
+    for (var i = 0; i < data.length; i++) {
+        html += "<td>" + data[i] + "</td>";
+        html += `<td>
+        <button type="button" onclick="EditItemInList(this)">EDIT</button>
+        <button type="button" onclick="DeleteItemInList(this)" class=${i}>DELETE</button>
+        </td>`;
+        html += "</tr><tr>";
+    }
+    html += "</tr></table>";
+    document.getElementById("list").innerHTML = html
+
+}
+
+function ShowItem(event) {
+    //console.log(event);
+    // IE does not know about the target attribute. It looks for srcElement
     // This function will get the event target in a browser-compatible way
     event = event || window.event;
     let target = event.target || event.srcElement;
@@ -25,29 +50,51 @@ function ShowItem(event){
     let showId = target.id + "-container";
     let ContentIds = document.getElementsByClassName("show-hide-section");
     //console.log(ContentIds);
-    for(let object=0;object<ContentIds.length;object++){
-    	//console.log(ContentIds[object].id);
-    	//console.log(showId);
-    	ContentIds[object].id == showId ? 
-    	document.getElementById(showId).style.display = "block" : 
-    	document.getElementById(ContentIds[object].id).style.display = "none"; 
+    for (let object = 0; object < ContentIds.length; object++) {
+        //console.log(ContentIds[object].id);
+        //console.log(showId);
+        if (ContentIds[object].id == "todo-container") {
+            ShowList();
+        }
+        ContentIds[object].id == showId ?
+            document.getElementById(showId).style.display = "block" :
+            document.getElementById(ContentIds[object].id).style.display = "none";
     }
 }
 
+//-------------------------------search item-----------------------------------------------
+// function search() {
+//     var searchTextBox = document.getElementById("searchBar");
+//     var tasksToSearch = searchTextBox.value;
+//     searchTextBox.value = "";
+//     var matchedTasks = [" "];
+//     matchedTasks.shift();
+//     var flag = 0;
+//     for (var i = 0; i < data.length; i++) {
+//         if (((tasks[i].toLocaleLowerCase()).indexOf(tasksToSearch.toLowerCase())) > -1) {
+//             matchedTasks.push(data[i]);
+//             flag = 1;
+//         }
+//     }
+//     updateTaskTable(matchedTasks);
+//     if (flag == 0) {
+//         alert("task doesn't exist");
+//     }
+// }
 
-function myFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("searchBar");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("list");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
+function search() {
+    let input = document.getElementById("searchBar");
+
+    // get results array
+    for (let index = 0; index < data.length; ++index) {
+        let foundIndex = data[index].title.search(input.value);
+        if (foundIndex > 0) {// set results to html dom
+            let node = document.createElement("p");
+            let textnode = document.createTextNode(
+                data[index].title
+            );
+            node.appendChild(textnode);
+            document.getElementById("search-list").appendChild(node);
         }
     }
 }
