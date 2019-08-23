@@ -52,7 +52,7 @@ function EditItemInList(element){
     //let editButton = document.getElementById(element.id);
     //let deleteButton = document.getElementById("deleteButton-" + element.id.split('-')[1]);
     let itemValue = row.cells[0].innerText;
-
+    //console.log(itemValue);
     //flag = true;
     //console.log(itemValue);
     row.deleteCell(0);
@@ -61,7 +61,7 @@ function EditItemInList(element){
     let index=element.id.split('-')[1];
     let html1 = `<input id="edit" type="text" value="${itemValue}">`;
     let html2 = `<button id="update" onclick="updateEntry('row-${index}')">UPDATE</button>
-                <button id="cancel" onclick="cancelUpdate('row-${index}')">CANCEL</button>`;
+                <button id="cancel" onclick="cancelUpdate('row-${index}','${itemValue}')">CANCEL</button>`;
                 //console.log(html);
     let editText = row.insertCell(0);
     editText.innerHTML = html1; 
@@ -88,16 +88,16 @@ function updateEntry(rowId){
 
 }
 
-function cancelUpdate(rowId){
+function cancelUpdate(rowId,value){
     let row = document.getElementById(rowId);
     //console.log(rowId);
-    let edit = document.getElementById("edit");
-    console.log(row.cells.length);
+    //let edit = document.getElementById("edit").value;
+    console.log(value);
     row.deleteCell(0);
     //row.deleteCell(0);
     let insertItem = row.insertCell(0);
     insertItem.appendChild(
-        document.createTextNode(edit.value)
+        document.createTextNode(value)
     );
     html = `<button type="button" id="editButton-${row.id.split('-')[1]}" onclick="EditItemInList(this)">EDIT</button>
              <button type="button" id="deleteButton-${row.id.split('-')[1]}" onclick="DeleteItemInList(this)">DELETE</button>`;
@@ -105,6 +105,7 @@ function cancelUpdate(rowId){
         let newButtons = row.insertCell(1);
         newButtons.innerHTML = html;
 
+        row.deleteCell(2);
 
 }
 
