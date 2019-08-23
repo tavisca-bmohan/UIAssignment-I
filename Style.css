@@ -1,0 +1,93 @@
+*{
+	box-sizing: border-box;
+}
+
+div{
+	border: 2px solid #000000;
+}
+
+header{
+	background-color: #6ab47b;
+	text-align: center;
+	height: 40px;
+	padding: 25px 20px;
+	font-size: 20px;
+}
+
+footer{
+	background-color: #6ab47b;
+	text-align: center;
+	height: 40px;
+	padding: 25px 20px;
+	font-size: 20px;
+	clear: both;
+}
+
+#menu{
+	width: 25%;
+	background-color: #aaa;
+	height: 500px;
+	float: left;
+	text-align: center;
+}
+
+#content{
+	width: 75%;
+	height: 500px;
+	background-color: #7FB3D5;
+	float: right;
+	text-align: center;
+}
+
+#content #searchBar{
+	width: 300px;
+	height: 30px;
+}
+
+#content #suggestions{
+	width: 300px;
+	margin-left: 277px;
+	background: #FFFFFF;
+	position: absolute;
+}
+
+#content button{
+	height: 30px;
+	width: 70px;
+}
+
+#contentWrapper #menu ul{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#contentWrapper #menu li{
+	display: block;
+	text-align: center;
+	font-size: 20px;
+	margin: 20px;
+}
+
+#contentWrapper #menu li a{
+	text-decoration: none;
+	color: #000000;
+}
+
+#contentWrapper #menu li:hover{
+	background-color: #FFFFFF;
+}
+
+#contentWrapper #content li{
+	font-size: 25px;
+	margin: 5px;
+	
+}
+
+#contentWrapper #content #list{
+	list-style-type: none;
+	text-align: center;
+	margin: 20px;
+	max-height: 300px;
+	overflow: scroll;
+}
