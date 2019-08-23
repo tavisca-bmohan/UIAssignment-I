@@ -7,6 +7,8 @@ function AddItem() {
     let textrInSearchBar = document.getElementById("searchBar").value;
     if (!data.includes(textrInSearchBar) && textrInSearchBar != "")
         data.push(textrInSearchBar);
+    else
+        alert("Item already exist"); 
     ShowList();
 	/*var addValue = document.getElementById("searchBar").value;
 	var list = document.getElementById("list");
@@ -47,8 +49,8 @@ function ShowList() {
 let flag = false;
 function EditItemInList(element){
     let row = document.getElementById("row-" + element.id.split('-')[1]);
-    let editButton = document.getElementById(element.id);
-    let deleteButton = document.getElementById("deleteButton-" + element.id.split('-')[1]);
+    //let editButton = document.getElementById(element.id);
+    //let deleteButton = document.getElementById("deleteButton-" + element.id.split('-')[1]);
     let itemValue = row.cells[0].innerText;
 
     //flag = true;
@@ -57,12 +59,14 @@ function EditItemInList(element){
     row.deleteCell(0);
     //row.deleteCell(2);
     let index=element.id.split('-')[1];
-    let html = `<input id="edit" type="text" value="${itemValue}">
-                <button id="update" onclick="updateEntry('row-${index}')">UPDATE</button>
+    let html1 = `<input id="edit" type="text" value="${itemValue}">`;
+    let html2 = `<button id="update" onclick="updateEntry('row-${index}')">UPDATE</button>
                 <button id="cancel" onclick="cancelUpdate('row-${index}')">CANCEL</button>`;
-                console.log(html);
-    let newButtons = row.insertCell(0);
-    newButtons.innerHTML = html; 
+                //console.log(html);
+    let editText = row.insertCell(0);
+    editText.innerHTML = html1; 
+    let newButtons = row.insertCell(1);
+    newButtons.innerHTML = html2;
 }
 
 function updateEntry(rowId){
@@ -70,6 +74,7 @@ function updateEntry(rowId){
     row = document.getElementById(rowId);
     let updatedValue = document.getElementById("edit").value;
     //console.log(updatedValue);
+    row.deleteCell(0);
     row.deleteCell(0);
     let insertItem = row.insertCell(0);
     insertItem.appendChild(
@@ -84,19 +89,22 @@ function updateEntry(rowId){
 }
 
 function cancelUpdate(rowId){
-    let row = document.getElementById("rowId");
+    let row = document.getElementById(rowId);
+    //console.log(rowId);
     let edit = document.getElementById("edit");
+    console.log(row.cells.length);
     row.deleteCell(0);
     //row.deleteCell(0);
     let insertItem = row.insertCell(0);
     insertItem.appendChild(
         document.createTextNode(edit.value)
     );
-    html1 = `<button type="button" id="editButton-${row.id.split('-')[1]}" onclick="EditItemInList(this)">EDIT</button>`;
-    html2 = `<button type="button" id="deleteButton-${row.id.split('-')[1]}" onclick="DeleteItemInList(this)">DELETE</button>`;
+    html = `<button type="button" id="editButton-${row.id.split('-')[1]}" onclick="EditItemInList(this)">EDIT</button>
+             <button type="button" id="deleteButton-${row.id.split('-')[1]}" onclick="DeleteItemInList(this)">DELETE</button>`;
     
         let newButtons = row.insertCell(1);
         newButtons.innerHTML = html;
+
 
 }
 
@@ -127,25 +135,6 @@ function ShowItem(event) {
     }
 }
 
-//-------------------------------search item-----------------------------------------------
-// function search() {
-//     var searchTextBox = document.getElementById("searchBar");
-//     var tasksToSearch = searchTextBox.value;
-//     searchTextBox.value = "";
-//     var matchedTasks = [" "];
-//     matchedTasks.shift();
-//     var flag = 0;
-//     for (var i = 0; i < data.length; i++) {
-//         if (((tasks[i].toLocaleLowerCase()).indexOf(tasksToSearch.toLowerCase())) > -1) {
-//             matchedTasks.push(data[i]);
-//             flag = 1;
-//         }
-//     }
-//     updateTaskTable(matchedTasks);
-//     if (flag == 0) {
-//         alert("task doesn't exist");
-//     }
-// }
 function showSuggestions() {
     let list = document.getElementById("suggestionListItems");
     list.innerHTML = '';
@@ -168,7 +157,6 @@ function hideSuggestions() {
     list.style.display = "none";
 
 }
-//------------------------------------------------------------------------------
 
 function findSimilarItem() {
     let list = document.getElementById("suggestionListItems");
@@ -180,22 +168,3 @@ function findSimilarItem() {
         }
     }
 }
-
-//------------------------------------------------------------------------------
-
-// function search() {
-//     let input = document.getElementById("searchBar");
-
-//     // get results array
-//     for (let index = 0; index < data.length; ++index) {
-//         let foundIndex = data[index].title.search(input.value);
-//         if (foundIndex > 0) {// set results to html dom
-//             let node = document.createElement("p");
-//             let textnode = document.createTextNode(
-//                 data[index].title
-//             );
-//             node.appendChild(textnode);
-//             document.getElementById("search-list").appendChild(node);
-//         }
-//     }
-// }
