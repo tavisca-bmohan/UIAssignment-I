@@ -26,18 +26,83 @@ function AddItem() {
 
 function ShowList() {
     document.getElementById("list").style.display = "block";
-    let html = `<table><tr>`;
+    let count = 1;
+    let html = `<table id="item-table">`;
     for (var i = 0; i < data.length; i++) {
-        html += "<td>" + data[i] + "</td>";
-        html += `<td>
-        <button type="button" onclick="EditItemInList(this)">EDIT</button>
-        <button type="button" onclick="DeleteItemInList(this)" class=${i}>DELETE</button>
-        </td>`;
-        html += "</tr><tr>";
+        html += `
+            <tr id="row-${count}">
+                <td>${data[i]}</td>
+                <td>
+                    <button type="button" id="editButton-${count}" onclick="EditItemInList(this)">EDIT</button>
+                    <button type="button" id="deleteButton-${count}" onclick="DeleteItemInList(this)">DELETE</button>
+                </td>
+            </tr>
+        `;
+        count++;
     }
-    html += "</tr></table>";
-    document.getElementById("list").innerHTML = html
+    html += "</table > ";
+    document.getElementById("list").innerHTML = html;
+}
 
+let flag = false;
+function EditItemInList(element){
+    let row = document.getElementById("row-" + element.id.split('-')[1]);
+    let editButton = document.getElementById(element.id);
+    let deleteButton = document.getElementById("deleteButton-" + element.id.split('-')[1]);
+    let itemValue = row.cells[0].innerText;
+
+    //flag = true;
+    //console.log(itemValue);
+    row.deleteCell(0);
+    row.deleteCell(0);
+    //row.deleteCell(2);
+    let index=element.id.split('-')[1];
+    let html = `<input id="edit" type="text" value="${itemValue}">
+                <button id="update" onclick="updateEntry('row-${index}')">UPDATE</button>
+                <button id="cancel" onclick="cancelUpdate('row-${index}')">CANCEL</button>`;
+                console.log(html);
+    let newButtons = row.insertCell(0);
+    newButtons.innerHTML = html; 
+}
+
+function updateEntry(rowId){
+    //console.log(rowId);
+    row = document.getElementById(rowId);
+    let updatedValue = document.getElementById("edit").value;
+    //console.log(updatedValue);
+    row.deleteCell(0);
+    let insertItem = row.insertCell(0);
+    insertItem.appendChild(
+        document.createTextNode(updatedValue)
+    );
+
+    html = `<button type="button" id="editButton-${row.id.split('-')[1]}" onclick="EditItemInList(this)">EDIT</button>
+            <button type="button" id="deleteButton-${row.id.split('-')[1]}" onclick="DeleteItemInList(this)">DELETE</button>`;
+    let newButtons = row.insertCell(1);
+    newButtons.innerHTML = html;
+
+}
+
+function cancelUpdate(rowId){
+    let row = document.getElementById("rowId");
+    let edit = document.getElementById("edit");
+    row.deleteCell(0);
+    //row.deleteCell(0);
+    let insertItem = row.insertCell(0);
+    insertItem.appendChild(
+        document.createTextNode(edit.value)
+    );
+    html1 = `<button type="button" id="editButton-${row.id.split('-')[1]}" onclick="EditItemInList(this)">EDIT</button>`;
+    html2 = `<button type="button" id="deleteButton-${row.id.split('-')[1]}" onclick="DeleteItemInList(this)">DELETE</button>`;
+    
+        let newButtons = row.insertCell(1);
+        newButtons.innerHTML = html;
+
+}
+
+function DeleteItemInList(element) {
+    let deleteRow = document.getElementById("row-" + element.id.split('-')[1]);
+    deleteRow.parentNode.removeChild(deleteRow);
 }
 
 function ShowItem(event) {
@@ -81,20 +146,56 @@ function ShowItem(event) {
 //         alert("task doesn't exist");
 //     }
 // }
+function showSuggestions() {
+    let list = document.getElementById("suggestionListItems");
+    list.innerHTML = '';
+    list.style.display = "block";
+    let suggestItem = document.getElementById("searchBar").value;
+    let count = 1;
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].toLocaleLowerCase().indexOf(suggestItem.toLocaleLowerCase()) > -1) {
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(data[i]));
+            list.appendChild(li);
+            count++;
+            if (count > 3) break;
+        }
+    }
 
-function search() {
-    let input = document.getElementById("searchBar");
+}
+function hideSuggestions() {
+    let list = document.getElementById("suggestionListItems");
+    list.style.display = "none";
 
-    // get results array
-    for (let index = 0; index < data.length; ++index) {
-        let foundIndex = data[index].title.search(input.value);
-        if (foundIndex > 0) {// set results to html dom
-            let node = document.createElement("p");
-            let textnode = document.createTextNode(
-                data[index].title
-            );
-            node.appendChild(textnode);
-            document.getElementById("search-list").appendChild(node);
+}
+//------------------------------------------------------------------------------
+
+function findSimilarItem() {
+    let list = document.getElementById("suggestionListItems");
+    //list.style.display = "none";
+    searchItem = document.getElementById("searchBar").value;
+    for (let i = 0; i < data.length; i++) {
+        if (searchItem == data[i]) {
+
         }
     }
 }
+
+//------------------------------------------------------------------------------
+
+// function search() {
+//     let input = document.getElementById("searchBar");
+
+//     // get results array
+//     for (let index = 0; index < data.length; ++index) {
+//         let foundIndex = data[index].title.search(input.value);
+//         if (foundIndex > 0) {// set results to html dom
+//             let node = document.createElement("p");
+//             let textnode = document.createTextNode(
+//                 data[index].title
+//             );
+//             node.appendChild(textnode);
+//             document.getElementById("search-list").appendChild(node);
+//         }
+//     }
+// }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="Style.css">
@@ -22,12 +24,15 @@
 			<div  id="content">
 				<div class="show-hide-section" id = "todo-container">
 					<h2>To Do</h2>
-					<input id="searchBar" type="text" name="searchBar" placeholder="Search...">
-					<button onclick="search()">SEARCH</button>
+					<input id="searchBar" type="text" name="searchBar" placeholder="Search..." onkeyup="showSuggestions()" onblur="hideSuggestions()" onfocus="showSuggestions()" >
+					<button onclick="findSimilarItem()">SEARCH</button>
 					<button onclick="AddItem()">ADD</button>
 
-					<div id="search-list"></div>
-
+					<div id="suggestions">
+						<ul id="suggestionListItems" > 
+						</ul>
+					</div>
+					
 					<div id="list"></div>
 				</div>
 
